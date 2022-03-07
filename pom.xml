@@ -6,7 +6,11 @@
 
   <groupId>com.monicode</groupId>
   <artifactId>monicservices</artifactId>
+  <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>customer</module>
+  </modules>
 
   <name>monicservices</name>
   <url>https://www.example.com</url>
