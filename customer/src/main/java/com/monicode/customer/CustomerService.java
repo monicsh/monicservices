@@ -1,5 +1,7 @@
 package com.monicode.customer;
 
+import com.monicode.clients.fraud.FraudCheckResponse;
+import com.monicode.clients.fraud.FraudClient;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -9,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 public class CustomerService {
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
+    private final FraudClient fraudClient;
 
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
@@ -19,20 +22,15 @@ public class CustomerService {
 
         // TODO : check email is valid
         // TODO : check email is not taken
-        // Store customer in db
         customerRepository.saveAndFlush(customer);
 
-        // TODO : check if fraudster
-        FraudCheckResponse fraudCheckResponse = restTemplate.getForObject(
-          "http://FRAUD/api/v1/fraud-check/{customerId}",
-                FraudCheckResponse.class,
-                customer.getId()
-        );
+        FraudCheckResponse fraudCheckResponse = fraudClient.isFraudster(customer.getId());
 
         if (fraudCheckResponse != null && fraudCheckResponse.isFraudster()) {
             throw new IllegalStateException("Fraudster");
         }
 
         // TODO : send notification
+        
     }
 }
