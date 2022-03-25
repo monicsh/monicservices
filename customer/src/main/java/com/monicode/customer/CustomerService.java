@@ -2,6 +2,8 @@ package com.monicode.customer;
 
 import com.monicode.clients.fraud.FraudCheckResponse;
 import com.monicode.clients.fraud.FraudClient;
+import com.monicode.clients.notification.NotificationClient;
+import com.monicode.clients.notification.NotificationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,6 +14,7 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
     private final FraudClient fraudClient;
+    private final NotificationClient notificationClient;
 
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
@@ -29,8 +32,12 @@ public class CustomerService {
         if (fraudCheckResponse != null && fraudCheckResponse.isFraudster()) {
             throw new IllegalStateException("Fraudster");
         }
+//
+//        // TODO : send notification
+        NotificationRequest notificationRequest =
+                new NotificationRequest(customer.getId(), customer.getEmail());
+        notificationClient.sendNotification(notificationRequest);
 
-        // TODO : send notification
-        
+
     }
 }
