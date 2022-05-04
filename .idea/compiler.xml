@@ -11,8 +11,12 @@
         <module name="clients" />
         <module name="eureka-server" />
         <module name="fraud" />
+        <module name="amqp" />
         <module name="customer" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="amqp" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
