@@ -9,10 +9,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="notification" />
         <module name="clients" />
+        <module name="amqp1" />
         <module name="eureka-server" />
         <module name="fraud" />
         <module name="customer" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="amqp" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,8 +1,9 @@
 package com.monicode.customer;
 
+import com.monicode.amqp.RabbitMQMessageProducer;
 import com.monicode.clients.fraud.FraudCheckResponse;
 import com.monicode.clients.fraud.FraudClient;
-import com.monicode.clients.notification.NotificationClient;
+//import com.monicode.clients.notification.NotificationClient;
 import com.monicode.clients.notification.NotificationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,8 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final RestTemplate restTemplate;
     private final FraudClient fraudClient;
-    private final NotificationClient notificationClient;
+//    private final NotificationClient notificationClient;
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
 
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
@@ -33,10 +35,19 @@ public class CustomerService {
             throw new IllegalStateException("Fraudster");
         }
 //
-//        // TODO : send notification
+//        // Send notification asynchronously
         NotificationRequest notificationRequest =
-                new NotificationRequest(customer.getId(), customer.getEmail());
-        notificationClient.sendNotification(notificationRequest);
+                new NotificationRequest(customer.getId(),
+                        customer.getEmail());
+
+//        String.format("Hi %s, welcome to monicode...", customer.getFirstName())
+//        notificationClient.sendNotification(notificationRequest);
+        rabbitMQMessageProducer.publish(
+                notificationRequest,
+                "internal.exchange",
+                "internal.notification.routing-key"
+
+        );
 
 
     }
