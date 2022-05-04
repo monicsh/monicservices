@@ -12,3 +12,7 @@ Notification Service :
 NotificationConfig for configuration Queue, RoutingKEys and Exchanges
 
 Define Binding
+
+
+---
+ampq >> RabbitMQMessageProducer
