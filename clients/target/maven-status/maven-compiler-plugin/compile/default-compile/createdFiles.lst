@@ -1,0 +1,5 @@
+com/monicode/clients/fraud/FraudCheckResponse.class
+com/monicode/clients/fraud/FraudClient.class
+com/monicode/clients/notification/NotificationRequest.class
+com/monicode/clients/notification/NotificationRequest$NotificationRequestBuilder.class
+com/monicode/clients/notification/NotificationClient.class
