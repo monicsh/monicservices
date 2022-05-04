@@ -9,9 +9,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="notification" />
         <module name="clients" />
+        <module name="amqp1" />
         <module name="eureka-server" />
         <module name="fraud" />
-        <module name="amqp" />
         <module name="customer" />
       </profile>
     </annotationProcessing>
