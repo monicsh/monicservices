@@ -22,7 +22,8 @@ public class NotificationController {
 
     @PostMapping
     public void sendNotification(@RequestBody NotificationRequest notificationRequest){
-        log.info("Notification Request made by customer_id : " + notificationRequest.getCustomerId());
-        notificationService.sendNotification(notificationRequest);
+//        log.info("Notification Request made by customer_id : " + notificationRequest.getCustomerId());
+//        notificationService.sendNotification(notificationRequest);
+        System.out.println("hello");
     }
 }

@@ -1,4 +1,4 @@
-package com.monicode.ampq;
+package com.monicode.amqp;
 
 
 import lombok.AllArgsConstructor;
@@ -10,6 +10,7 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 @AllArgsConstructor
