@@ -8,10 +8,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="notification" />
+        <module name="product" />
         <module name="clients" />
+        <module name="fraud" />
         <module name="amqp1" />
         <module name="eureka-server" />
-        <module name="fraud" />
         <module name="customer" />
       </profile>
     </annotationProcessing>
