@@ -24,6 +24,7 @@ public class ProductController {
 
     @PostMapping
     public void addProduct(@RequestBody ProductRequest request){
+        // TODO : Check the request from Admin user
         log.info("Adding new product {}", request);
         productService.addProduct(request);
     }
