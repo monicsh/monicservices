@@ -3,12 +3,16 @@ package com.monicode.customer;
 import com.monicode.amqp.RabbitMQMessageProducer;
 import com.monicode.clients.fraud.FraudCheckResponse;
 import com.monicode.clients.fraud.FraudClient;
+import lombok.extern.slf4j.Slf4j;
 //import com.monicode.clients.notification.NotificationClient;
 import com.monicode.clients.notification.NotificationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
+@Slf4j
 @Service
 @AllArgsConstructor
 public class CustomerService {
@@ -50,5 +54,15 @@ public class CustomerService {
         );
 
 
+    }
+
+    public Customer getById(Integer id) {
+        Customer customer = customerRepository.getById(id);
+        log.info("Customer {}", customer.getFirstName());
+        return customer;
+    }
+
+    public List<Customer> getCustomersByFirstName(String name) {
+        return customerRepository.getByFirstName(name);
     }
 }
